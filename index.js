@@ -19,21 +19,17 @@ async function api_call() {
         }, config)
     
         if (response.status !== 200) { core.setFailed("Error. API response code: " + response.status) }
-    
         const responseData = response.data
-    
         let projects = []
     
-        responseData.projects.forEach(project => {
-            projects.append(project.id)
+        await responseData.projects.forEach(project => {
+            projects.push(project.id)
         });
-    
+
         core.setOutput("project_ids", projects);
     
     } catch(err) {
-        if(axios.isAxiosError(err)) {
-            core.setFailed(err.message);
-        }
+        core.setFailed(err.message);
     }
        
 }

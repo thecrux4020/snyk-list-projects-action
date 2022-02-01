@@ -1,20 +1,16 @@
 # Snyk get projects action
 
-This actions get all the projects in Snyk filtered by the name and origin
+This action deactivate a project in Snyk given the ID
 
 ## Inputs
 
   token:
     description: 'Snyk API token'
     required: true
-  project_name:
-    description: "Snyk project name"
+  project_id:
+    description: "Snyk project id"
     required: true
     default: "-"
-  origin:
-    description: "Snyk project origin"
-    required: true
-    default: "ecr"
   org_id:
     description: "Snyk Organization ID"
     required: true
@@ -24,29 +20,18 @@ This actions get all the projects in Snyk filtered by the name and origin
 
 **Required** The API token to access Snyk.
 
-## `project_name`
+## `project_id`
 
-**Required** The Snyk project name. It matches with StartsWith. Default `"-"`.
-
-## `origin`
-
-**Required** The Snyk project origin. Default `"ecr"`.
+**Required** The Snyk project id. Default `"-"`.
 
 ## `org_id`
 
 **Required** The Snyk organization ID. Default `"-"`.
 
-## Outputs
-
-## `project_ids`
-
-The IDs of Snyk Projects
-
 ## Example usage
 
-uses: actions/snyk-get-all-projects-action@v1.1
+uses: actions/snyk-deactivate-project-action@v1.0.0
 with:
   token: '1234'
-  project_name: 'test_project'
-  origin: 'github'
+  project_id: '32432432'
   org_id: 'asd123'

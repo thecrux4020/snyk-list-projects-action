@@ -1,14 +1,14 @@
 {
-  "name": "snyk-list-projects-action",
+  "name": "snyk-deactivate-project-action",
   "version": "1.0.0",
-  "description": "List all Snyk projects that match the filters",
+  "description": "Deactivate a Snyk project given the ID",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com-thecrux4020:thecrux4020/snyk-list-projects-action.git"
+    "url": "git@github.com-thecrux4020:thecrux4020/snyk-deactivate-project-action.git"
   },
   "keywords": [],
   "author": "",

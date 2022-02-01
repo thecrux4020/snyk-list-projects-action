@@ -1,5 +1,7 @@
 name: 'Snyk Get Projects'
 description: 'Get All Snyk project'
+icon: server
+color: blue
 inputs:
   api_token:
     description: 'Snyk API token'

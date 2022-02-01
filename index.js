@@ -1,36 +1,36 @@
 const core = require('@actions/core');
-const request = require('request');
+const axios = require('axios')
+
 
 try {
 
-    const options = {
+    const config = {
         headers: {
-              'Authorization': 'token ' + core.getInput('api_token'),
-              'Content-Type' : 'application/json'
-        },
-        uri: 'https://snyk.io/api/v1/org/' + core.getInput('org_id') + '/projects',
-        method: 'POST',
-        json: {
-            'filters': {
-                'name': core.getInput('project_name'),
-                'origin': core.getInput('origin')
-            }
+            "Authorization": 'token ' + core.getInput('api_token')
         }
     }
 
-    request(options, (err, res, body) => {
-        if (err) { core.setFailed(err); }
+    const response = await axios.post('https://snyk.io/api/v1/org/' + core.getInput('org_id') + '/projects', {
+        'filters': {
+            'name': core.getInput('project_name'),
+            'origin': core.getInput('origin')
+        }
+    }, config)
 
-        let projects = []
+    if (response.status !== 200) { core.setFailed("Error. API response code: " + response.status) }
 
-        body.projects.forEach(project => {
-            projects.append(project.id)
-        });
+    const responseData = response.data
 
-        core.setOutput("project_ids", projects);
+    let projects = []
 
-    })
+    responseData.projects.forEach(project => {
+        projects.append(project.id)
+    });
 
-} catch (error) {
-    core.setFailed(error.message);
+    core.setOutput("project_ids", projects);
+
+} catch(err) {
+    if(axios.isAxiosError(err)) {
+        core.setFailed(error.message);
+    }
 }

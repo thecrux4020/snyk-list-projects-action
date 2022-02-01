@@ -1,0 +1,24 @@
+name: 'Snyk Get Projects'
+description: 'Get All Snyk project'
+inputs:
+  api_token:
+    description: 'Snyk API token'
+    required: true
+  project_name:
+    description: "Snyk project name"
+    required: true
+    default: "-"
+  origin:
+    description: "Snyk project origin"
+    required: true
+    default: "ecr"
+  org_id:
+    description: "Snyk Organization ID"
+    required: true
+    default: "-"
+outputs:
+  project_ids: 
+    description: 'The IDs of Snyk projects'
+runs:
+  using: 'node16'
+  main: 'index.js'
